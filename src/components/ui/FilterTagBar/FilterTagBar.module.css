@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  gap: 1em;
+  padding: 0.4em;
+}
+
+.tag {
+  padding: 0.2em 0.6em;
+}

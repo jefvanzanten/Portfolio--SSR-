@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --card-width: 285px;
+  --container-max-width: 90%;
+  --project-container-width: calc(var(--card-width) * 3 + 4em);
+  --project-offset: calc((100vw - var(--project-area-width)) / 2);
+  --card-bg: rgb(20, 20, 20);
+  --card-text-color: rgb(175, 175, 175);
+  background-color: #000000;
+  color: white;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  z-index: 0;
+  align-items: center;
+  width: 100vw;
+  height: 100vw;
+}
+
+p {
+  font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS",
+    sans-serif;
+  text-wrap: wrap;
+}
+
+@media screen and (max-width: 600px) {
+  html,
+  body {
+    font-size: 0.9em;
+  }
+}
