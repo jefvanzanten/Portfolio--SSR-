@@ -1,10 +1,11 @@
 import { createComponent, ssr, ssrHydrationKey, ssrAttribute, escape } from "solid-js/web";
-import { For } from "solid-js";
-import { L as Link$1 } from "./router-C3U_SeZn.mjs";
-import { u as useProjects, P as ProjectCard } from "./ProjectCard-BkHoEKf5.mjs";
+import { Suspense, For } from "solid-js";
+import { L as Link$1 } from "./router-DK1QD-UY.mjs";
+import { P as ProjectCard, u as useProjects } from "./ProjectCard-BOjGvxKO.mjs";
 import "./server.mjs";
 import "node:async_hooks";
 import "node:stream/web";
+import "./useImageViewModal-DQHEEIMU.mjs";
 const introduction = "_introduction_wyh4v_33";
 const title = "_title_wyh4v_67";
 const line = "_line_wyh4v_91";
@@ -41,7 +42,6 @@ function NavButton({
 var _tmpl$ = ["<main", "><div", "><section", "><h1>Full-stack en mobile developer</h1><p>Hey, mijn naam is Jef. Momenteel volg ik de studie Software Development (HBO Associate Degree).<br><br>Ik wissel met programmeren tussen frontend, backend en mobile projecten, zodat mijn kennis en vaardigheden op elk vlak blijven ontwikkelen.</p><div", "><!--$-->", "<!--/--><!--$-->", "<!--/--></div></section><section", "><div", "><span", "></span><h1>Featured Projects</h1><span", "></span></div><div", ">", "</div></section></div></main>"], _tmpl$2 = ["<p", ">Loading...</p>"];
 const HomePage = () => {
   const {
-    loading,
     projects
   } = useProjects();
   return ssr(_tmpl$, ssrHydrationKey(), ssrAttribute("class", escape(styles$1["content-container"], true), false), ssrAttribute("class", escape(styles$1.introduction, true), false), ssrAttribute("class", escape(styles$1["button-container"], true), false), escape(createComponent(NavButton, {
@@ -50,13 +50,20 @@ const HomePage = () => {
   })), escape(createComponent(NavButton, {
     title: "Neem contact",
     to: "/contact"
-  })), ssrAttribute("class", escape(styles$1["featured-projects-container"], true), false), ssrAttribute("class", escape(styles$1.title, true), false), ssrAttribute("class", escape(styles$1.line, true), false), ssrAttribute("class", escape(styles$1.line, true), false), ssrAttribute("class", escape(styles$1["featured-projects-list"], true), false), loading() ? ssr(_tmpl$2, ssrHydrationKey() + ssrAttribute("class", escape(styles$1["loading-text"], true), false)) : escape(createComponent(For, {
-    get each() {
-      return projects().filter((project) => project.highlighted);
+  })), ssrAttribute("class", escape(styles$1["featured-projects-container"], true), false), ssrAttribute("class", escape(styles$1.title, true), false), ssrAttribute("class", escape(styles$1.line, true), false), ssrAttribute("class", escape(styles$1.line, true), false), ssrAttribute("class", escape(styles$1["featured-projects-list"], true), false), escape(createComponent(Suspense, {
+    get fallback() {
+      return ssr(_tmpl$2, ssrHydrationKey() + ssrAttribute("class", escape(styles$1["loading-text"], true), false));
     },
-    children: (project) => createComponent(ProjectCard, {
-      project
-    })
+    get children() {
+      return createComponent(For, {
+        get each() {
+          return projects().filter((project) => project.highlighted);
+        },
+        children: (project) => createComponent(ProjectCard, {
+          project
+        })
+      });
+    }
   })));
 };
 function RouteComponent() {

@@ -1,7 +1,7 @@
 import styles from "./ProjectCard.module.css";
-import { createSignal, For } from "solid-js";
+import { For, onMount } from "solid-js";
 import type { Project } from "../../models/types.project";
-import { setIsModalOpen, setModalImgUrl } from "./ImageViewModal";
+import { useImageViewModal } from "../../hooks/useImageViewModal";
 import GithubLink from "./GithubLink";
 
 type ProjectCardProps = {
@@ -9,19 +9,44 @@ type ProjectCardProps = {
 };
 
 function ProjectCard({ project }: ProjectCardProps) {
-  const setModalSettings = () => {
-    setModalImgUrl(project.coverUrl);
-    setIsModalOpen(true);
+  const { openModal, setImageUrl } = useImageViewModal();
+  let cardRef: HTMLElement | undefined;
+
+  onMount(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = new Image();
+            img.src = project.coverUrl;
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: "50px" }
+    );
+
+    if (cardRef) {
+      observer.observe(cardRef);
+    }
+
+    return () => observer.disconnect();
+  });
+
+  const handleImageClick = () => {
+    setImageUrl(project.coverUrl);
+    openModal();
   };
 
   return (
     <>
-      <article class={styles["project-card-container"]}>
-        <button onclick={setModalSettings} class={styles.imgContainer}>
+      <article ref={cardRef} class={styles["project-card-container"]}>
+        <button onclick={handleImageClick} class={styles.imgContainer}>
           <img
             class={styles.cover}
             src={project.thumbUrl}
             alt={`${project.name} cover`}
+            loading="lazy"
           />
         </button>
         <section class={styles["project-info"]}>

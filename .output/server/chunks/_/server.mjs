@@ -8208,7 +8208,7 @@ function getResponse() {
   return event.res;
 }
 async function getStartManifest() {
-  const { tsrStartManifest } = await import("./_tanstack-start-manifest_v-TEUQmi8j.mjs");
+  const { tsrStartManifest } = await import("./_tanstack-start-manifest_v-Ve-o5cWb.mjs");
   const startManifest = tsrStartManifest();
   const rootRoute = startManifest.routes[rootRouteId] = startManifest.routes[rootRouteId] || {};
   rootRoute.assets = rootRoute.assets || [];
@@ -8684,7 +8684,7 @@ function getStartResponseHeaders(opts) {
 let entriesPromise;
 let manifestPromise;
 async function loadEntries() {
-  const routerEntry = await import("./router-C3U_SeZn.mjs").then((n) => n.w);
+  const routerEntry = await import("./router-DK1QD-UY.mjs").then((n) => n.r);
   const startEntry = await import("./start-HYkvq4Ni.mjs");
   return { startEntry, routerEntry };
 }
@@ -9110,8 +9110,6 @@ export {
   isModuleNotFoundError as h,
   invariant as i,
   joinPaths as j,
-  trimPath as k,
-  interpolatePath as l,
   matchContext as m,
   rootRouteId as r,
   trimPathLeft as t,

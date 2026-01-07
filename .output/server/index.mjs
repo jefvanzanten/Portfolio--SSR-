@@ -1294,68 +1294,82 @@ const assets = {
     "size": 15002,
     "path": "../public/tanstack-word-logo-white.svg"
   },
-  "/assets/index--gRRuCeD.js": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": '"8e9-s12A+3pSv2gWcgouEG7fripEuwI"',
-    "mtime": "2026-01-05T16:14:31.556Z",
-    "size": 2281,
-    "path": "../public/assets/index--gRRuCeD.js"
+  "/assets/ImageViewModal-CTCE1QQf.css": {
+    "type": "text/css; charset=utf-8",
+    "etag": '"472-Sv4gWCIusH74KHzl8kFNQGdrsZw"',
+    "mtime": "2026-01-07T10:44:00.174Z",
+    "size": 1138,
+    "path": "../public/assets/ImageViewModal-CTCE1QQf.css"
   },
-  "/assets/index-BAx60hEQ.js": {
+  "/assets/ImageViewModal-Dyrta8qG.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": '"1d6d-KKEGsSDOjoPYCgOQIBLpfh9oRcs"',
-    "mtime": "2026-01-05T16:14:31.556Z",
-    "size": 7533,
-    "path": "../public/assets/index-BAx60hEQ.js"
+    "etag": '"357-5EP7CmGqSfyh5fkgG0a1QfSGGzY"',
+    "mtime": "2026-01-07T10:44:00.175Z",
+    "size": 855,
+    "path": "../public/assets/ImageViewModal-Dyrta8qG.js"
+  },
+  "/assets/index-BMhkLOZV.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": '"910-til5LQzSQKjRJDoMjpSv+V8BR10"',
+    "mtime": "2026-01-07T10:44:00.175Z",
+    "size": 2320,
+    "path": "../public/assets/index-BMhkLOZV.js"
   },
   "/assets/index-D5uMGloG.css": {
     "type": "text/css; charset=utf-8",
     "etag": '"ac3-y4MaVXBT3/KvC1un7LeI6XbMlnQ"',
-    "mtime": "2026-01-05T16:14:31.555Z",
+    "mtime": "2026-01-07T10:44:00.174Z",
     "size": 2755,
     "path": "../public/assets/index-D5uMGloG.css"
+  },
+  "/assets/index-DAMbR2jo.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": '"1d8d-xSiRiBbKBY7wFd0iPxkxS5WTL8o"',
+    "mtime": "2026-01-07T10:44:00.175Z",
+    "size": 7565,
+    "path": "../public/assets/index-DAMbR2jo.js"
   },
   "/assets/index-DIQ1fhJ6.css": {
     "type": "text/css; charset=utf-8",
     "etag": '"6a1-0/2UTC/Kh+QSFPJXocn0wxRY3VE"',
-    "mtime": "2026-01-05T16:14:31.555Z",
+    "mtime": "2026-01-07T10:44:00.174Z",
     "size": 1697,
     "path": "../public/assets/index-DIQ1fhJ6.css"
   },
-  "/assets/main-CTCE1QQf.css": {
-    "type": "text/css; charset=utf-8",
-    "etag": '"472-Sv4gWCIusH74KHzl8kFNQGdrsZw"',
-    "mtime": "2026-01-05T16:14:31.555Z",
-    "size": 1138,
-    "path": "../public/assets/main-CTCE1QQf.css"
-  },
-  "/assets/main-De4MXF_C.js": {
+  "/assets/main-DjitxSfm.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": '"23e41-ITiLcEGBerq4rny+ses9RIVwVSI"',
-    "mtime": "2026-01-05T16:14:31.556Z",
-    "size": 147009,
-    "path": "../public/assets/main-De4MXF_C.js"
+    "etag": '"23e97-zDQpJytaWF/K7aCR5KMLI6WFlQw"',
+    "mtime": "2026-01-07T10:44:00.175Z",
+    "size": 147095,
+    "path": "../public/assets/main-DjitxSfm.js"
   },
   "/assets/ProjectCard-CW6seMPe.css": {
     "type": "text/css; charset=utf-8",
     "etag": '"8f3-YmB7hhOoDTY8bI8CfSB8WjLypeM"',
-    "mtime": "2026-01-05T16:14:31.556Z",
+    "mtime": "2026-01-07T10:44:00.174Z",
     "size": 2291,
     "path": "../public/assets/ProjectCard-CW6seMPe.css"
   },
-  "/assets/ProjectCard-DIqfUW45.js": {
+  "/assets/ProjectCard-pKYkgjsF.js": {
     "type": "text/javascript; charset=utf-8",
-    "etag": '"23f9-udyn8hnZpDG+zfKUwnht/oeNmNI"',
-    "mtime": "2026-01-05T16:14:31.556Z",
-    "size": 9209,
-    "path": "../public/assets/ProjectCard-DIqfUW45.js"
+    "etag": '"2549-N+CyiMo5+AlSNxSJCLY16OfkBK4"',
+    "mtime": "2026-01-07T10:44:00.175Z",
+    "size": 9545,
+    "path": "../public/assets/ProjectCard-pKYkgjsF.js"
   },
   "/assets/styles-iNglfdEo.css": {
     "type": "text/css; charset=utf-8",
     "etag": '"2b3-e2Uwt0W3X9PPHBPEAX8EnfYK0u0"',
-    "mtime": "2026-01-05T16:14:31.555Z",
+    "mtime": "2026-01-07T10:44:00.173Z",
     "size": 691,
     "path": "../public/assets/styles-iNglfdEo.css"
+  },
+  "/assets/useImageViewModal-BoNf6qRk.js": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": '"c5-bZnj2crmNe9QuebcfZswBAr9Znw"',
+    "mtime": "2026-01-07T10:44:00.175Z",
+    "size": 197,
+    "path": "../public/assets/useImageViewModal-BoNf6qRk.js"
   },
   "/covers/createThumbNails.cs": {
     "type": "text/plain; charset=utf-8",

@@ -1,6 +1,7 @@
-import { createComponent, ssr, ssrHydrationKey, ssrAttribute, escape } from "solid-js/web";
-import { createSignal, For, createEffect } from "solid-js";
-import { u as useProjects, P as ProjectCard } from "./ProjectCard-BkHoEKf5.mjs";
+import { ssr, ssrHydrationKey, ssrAttribute, escape, createComponent } from "solid-js/web";
+import { createSignal, createMemo, Suspense, For, createEffect } from "solid-js";
+import { u as useProjects, P as ProjectCard } from "./ProjectCard-BOjGvxKO.mjs";
+import "./useImageViewModal-DQHEEIMU.mjs";
 const styles$1 = {
   "content-container": "_content-container_qq8gg_1",
   "project-container": "_project-container_qq8gg_17",
@@ -61,16 +62,15 @@ function FilterTagBar({
     children: (tag2) => ssr(_tmpl$2$1, ssrHydrationKey() + ssrAttribute("class", escape(style.tag, true), false), escape(tag2))
   })));
 }
-var _tmpl$ = ["<div", ">Loading...</div>"], _tmpl$2 = ["<main", "><div", "><section", "><button>", "</button><!--$-->", "<!--/--></section><!--$-->", "<!--/--><section", ">", "</section></div></main>"], _tmpl$3 = ["<p", ">Loading...</p>"];
+var _tmpl$ = ["<main", "><div", "><section", "><button>", "</button><!--$-->", "<!--/--></section><!--$-->", "<!--/--><section", ">", "</section></div></main>"], _tmpl$2 = ["<p", ">Loading...</p>"];
 function ProjectsPage() {
   const {
-    loading,
     projects
   } = useProjects();
   const [isFilterMenuOpen, setIsFilterMenuOpen] = createSignal(false);
   const [selectedLanguages, setSelectedLanguages] = createSignal([]);
   const [selectedLibraries, setSelectedLibraries] = createSignal([]);
-  const getFilteredProjects = () => {
+  const filtered = createMemo(() => {
     return projects().filter((project) => {
       if (!project.languages || !project.libraries) {
         return false;
@@ -79,18 +79,14 @@ function ProjectsPage() {
       const libraryMatch = selectedLibraries().length === 0 || selectedLibraries().every((lib) => project.libraries.includes(lib));
       return languageMatch && libraryMatch;
     });
-  };
-  const filtered = getFilteredProjects();
+  });
   const toggleLanguage = (language) => {
     setSelectedLanguages((prev) => prev.includes(language) ? prev.filter((l) => l !== language) : [...prev, language]);
   };
   const toggleLibrary = (library) => {
     setSelectedLibraries((prev) => prev.includes(library) ? prev.filter((l) => l !== library) : [...prev, library]);
   };
-  if (loading()) {
-    return ssr(_tmpl$, ssrHydrationKey());
-  }
-  return ssr(_tmpl$2, ssrHydrationKey(), ssrAttribute("class", escape(styles$1["content-container"], true), false), ssrAttribute("class", escape(styles$1["filter-container"], true), false), isFilterMenuOpen() ? "Close Filters" : "Open Filters", selectedLanguages().length > 0 || selectedLibraries().length > 0 ? escape(createComponent(FilterTagBar, {
+  return ssr(_tmpl$, ssrHydrationKey(), ssrAttribute("class", escape(styles$1["content-container"], true), false), ssrAttribute("class", escape(styles$1["filter-container"], true), false), isFilterMenuOpen() ? "Close Filters" : "Open Filters", selectedLanguages().length > 0 || selectedLibraries().length > 0 ? escape(createComponent(FilterTagBar, {
     get tags() {
       return [...selectedLanguages(), ...selectedLibraries()];
     },
@@ -111,16 +107,23 @@ function ProjectsPage() {
     },
     toggleLanguage,
     toggleLibrary
-  })), ssrAttribute("class", escape(styles$1["project-container"], true), false), loading() ? ssr(_tmpl$3, ssrHydrationKey() + ssrAttribute("class", escape(styles$1["loading-text"], true), false)) : escape(createComponent(For, {
-    each: filtered,
-    children: (project) => createComponent(ProjectCard, {
-      project
-    })
+  })), ssrAttribute("class", escape(styles$1["project-container"], true), false), escape(createComponent(Suspense, {
+    get fallback() {
+      return ssr(_tmpl$2, ssrHydrationKey() + ssrAttribute("class", escape(styles$1["loading-text"], true), false));
+    },
+    get children() {
+      return createComponent(For, {
+        get each() {
+          return filtered();
+        },
+        children: (project) => createComponent(ProjectCard, {
+          project
+        })
+      });
+    }
   })));
 }
-function RouteComponent() {
-  return createComponent(ProjectsPage, {});
-}
+const SplitComponent = ProjectsPage;
 export {
-  RouteComponent as component
+  SplitComponent as component
 };

@@ -1,6 +1,7 @@
-import { createSignal, For } from "solid-js";
+import { createSignal, onMount, For } from "solid-js";
 import { ssr, ssrHydrationKey, ssrAttribute, escape, createComponent } from "solid-js/web";
-const projects = [
+import { u as useImageViewModal } from "./useImageViewModal-DQHEEIMU.mjs";
+const projects$1 = [
   {
     id: 11,
     name: "Game Collection",
@@ -232,10 +233,9 @@ const projects = [
     highlighted: false
   }
 ];
+const [projects] = createSignal(projects$1);
 function useProjects() {
-  const [projects$1] = createSignal(projects);
-  const [loading] = createSignal(false);
-  return { projects: projects$1, loading };
+  return { projects };
 }
 const imgContainer = "_imgContainer_1wn5k_39";
 const cover = "_cover_1wn5k_63";
@@ -268,10 +268,28 @@ function GithubLink({
 }) {
   return ssr(_tmpl$$1, ssrHydrationKey() + ssrAttribute("class", escape(styles.socialContainer, true), false) + ssrAttribute("href", escape(url, true), false), ssrAttribute("class", escape(styles.logo, true), false) + ssrAttribute("src", escape(iconUrl, true), false), ssrAttribute("class", escape(styles.p, true), false), escape(name));
 }
-var _tmpl$ = ["<article", "><button", "><img", ' alt="', '"></button><section', "><h2", ">", "</h2><p", ">", "</p></section><div", "><!--$-->", "<!--/--><!--$-->", "<!--/--></div><!--$-->", "<!--/--></article>"], _tmpl$2 = ["<span", ">", "</span>"];
+var _tmpl$ = ["<article", "><button", "><img", ' alt="', '" loading="lazy"></button><section', "><h2", ">", "</h2><p", ">", "</p></section><div", "><!--$-->", "<!--/--><!--$-->", "<!--/--></div><!--$-->", "<!--/--></article>"], _tmpl$2 = ["<span", ">", "</span>"];
 function ProjectCard({
   project
 }) {
+  const {
+    openModal,
+    setImageUrl
+  } = useImageViewModal();
+  onMount(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = new Image();
+          img.src = project.coverUrl;
+          observer.disconnect();
+        }
+      });
+    }, {
+      rootMargin: "50px"
+    });
+    return () => observer.disconnect();
+  });
   return ssr(_tmpl$, ssrHydrationKey() + ssrAttribute("class", escape(styles$1["project-card-container"], true), false), ssrAttribute("class", escape(styles$1.imgContainer, true), false), ssrAttribute("class", escape(styles$1.cover, true), false) + ssrAttribute("src", escape(project.thumbUrl, true), false), `${escape(project.name, true)} cover`, ssrAttribute("class", escape(styles$1["project-info"], true), false), ssrAttribute("class", escape(styles$1.title, true), false), escape(project.name), ssrAttribute("class", escape(styles$1.description, true), false), Array.isArray(project.description) ? escape(project.description.join(" ")) : escape(project.description), ssrAttribute("class", escape(styles$1["tag-container"], true), false), escape(createComponent(For, {
     get each() {
       return project.libraries;

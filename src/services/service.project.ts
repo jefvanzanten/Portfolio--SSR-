@@ -1,9 +1,12 @@
 import { createSignal } from "solid-js";
 import { projects as projectsData } from "../data/projects";
+// import { perf } from "../utils/performance";
 
+const [projects] = createSignal(projectsData);
 export default function useProjects() {
-  const [projects] = createSignal(projectsData);
-  const [loading] = createSignal(false);
+  // perf.measureSync("Projects data parse", () => {
+  //   perf.logSize("Projects data", projectsData);
+  // });
 
-  return { projects, loading };
+  return { projects };
 }

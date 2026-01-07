@@ -1,20 +1,23 @@
-import { createSignal, For } from "solid-js";
+import { createSignal, createMemo, For, Show, Suspense } from "solid-js";
 import styles from "./ProjectsPage.module.css";
 import useProjects from "../../services/service.project";
 import type { Language, Library } from "../../models/types.project";
 import ProjectCard from "../../components/ui/ProjectCard";
 import FilterMenu from "../../components/ui/FilterMenu/FilterMenu";
 import FilterTagBar from "../../components/ui/FilterTagBar/FilterTagBar";
+// import { useRoutePerformance } from "../../hooks/useRoutePerformance";
 
 export default function ProjectsPage() {
-  const { loading, projects } = useProjects();
+  // useRoutePerformance("ProjectsPage");
+
+  const { projects } = useProjects();
   const [isFilterMenuOpen, setIsFilterMenuOpen] = createSignal(false);
   const [selectedLanguages, setSelectedLanguages] = createSignal<Language[]>(
     []
   );
   const [selectedLibraries, setSelectedLibraries] = createSignal<Library[]>([]);
 
-  const getFilteredProjects = () => {
+  const filtered = createMemo(() => {
     return projects().filter((project) => {
       if (!project.languages || !project.libraries) {
         return false;
@@ -30,9 +33,7 @@ export default function ProjectsPage() {
 
       return languageMatch && libraryMatch;
     });
-  };
-
-  const filtered = getFilteredProjects();
+  });
 
   const toggleLanguage = (language: Language) => {
     setSelectedLanguages((prev) =>
@@ -49,10 +50,6 @@ export default function ProjectsPage() {
         : [...prev, library]
     );
   };
-
-  if (loading()) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <main>
@@ -84,13 +81,11 @@ export default function ProjectsPage() {
           />
         )}
         <section class={styles["project-container"]}>
-          {loading() ? (
-            <p class={styles["loading-text"]}>Loading...</p>
-          ) : (
-            <For each={filtered}>
+          <Suspense fallback={<p class={styles["loading-text"]}>Loading...</p>}>
+            <For each={filtered()}>
               {(project) => <ProjectCard project={project} />}
             </For>
-          )}
+          </Suspense>
         </section>
       </div>
     </main>

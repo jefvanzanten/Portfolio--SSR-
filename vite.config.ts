@@ -7,9 +7,10 @@ import { tanstackStart } from '@tanstack/solid-start/plugin/vite'
 import solidPlugin from 'vite-plugin-solid'
 import { nitro } from 'nitro/vite'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
-    devtools(),
+    // Alleen devtools in development
+    mode === 'development' && devtools(),
     nitro(),
     // this is the plugin that enables path aliases
     viteTsConfigPaths({
@@ -18,5 +19,5 @@ export default defineConfig({
     tailwindcss(),
     tanstackStart(),
     solidPlugin({ ssr: true }),
-  ],
-})
+  ].filter(Boolean),
+}))

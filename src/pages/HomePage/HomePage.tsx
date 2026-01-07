@@ -1,13 +1,12 @@
-import { For } from "solid-js";
+import { For, Suspense } from "solid-js";
 
 import styles from "./HomePage.module.css";
 import NavButton from "../../components/ui/NavButton";
 import useProjects from "../../services/service.project";
 import ProjectCard from "../../components/ui/ProjectCard";
-import ImageViewModal from "../../components/ui/ImageViewModal";
 
 const HomePage = () => {
-  const { loading, projects } = useProjects();
+  const { projects } = useProjects();
 
   return (
     <main>
@@ -37,13 +36,13 @@ const HomePage = () => {
           </div>
 
           <div class={styles["featured-projects-list"]}>
-            {loading() ? (
-              <p class={styles["loading-text"]}>Loading...</p>
-            ) : (
+            <Suspense
+              fallback={<p class={styles["loading-text"]}>Loading...</p>}
+            >
               <For each={projects().filter((project) => project.highlighted)}>
                 {(project) => <ProjectCard project={project} />}
               </For>
-            )}
+            </Suspense>
           </div>
         </section>
       </div>
