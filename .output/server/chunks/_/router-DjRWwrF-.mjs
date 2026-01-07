@@ -1209,11 +1209,11 @@ function RootComponent() {
     }
   }), ssrStyleProperty("background-color:", "#0a0a0a") + ssrStyleProperty(";color:", "white"), escape(createComponent(HeadContent, {})), escape(createComponent(Outlet, {})), escape(createComponent(ImageViewModal, {})), escape(createComponent(TanStackRouterDevtools, {})), escape(createComponent(Scripts, {})));
 }
-const $$splitComponentImporter$1 = () => import("./index-HqC5xmS-.mjs");
+const $$splitComponentImporter$1 = () => import("./index-EUpVakaR.mjs");
 const Route$1 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-BvAzozc4.mjs");
+const $$splitComponentImporter = () => import("./index-C8AUMIK0.mjs");
 const Route2 = createFileRoute("/projects/")({
   component: lazyRouteComponent($$splitComponentImporter, "component")
 });

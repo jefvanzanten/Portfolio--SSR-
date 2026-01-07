@@ -1,4 +1,4 @@
-import { createEffect } from "solid-js";
+import { createEffect, type Component } from "solid-js";
 import type { Language, Library } from "../../../models/types.project";
 import styles from "./FilterMenu.module.css";
 
@@ -10,25 +10,19 @@ type FilterMenuProps = {
   toggleLibrary: (library: Library) => void;
 };
 
-export default function FilterMenu({
-  closemenu,
-  selectedLanguages,
-  selectedLibraries,
-  toggleLanguage,
-  toggleLibrary,
-}: FilterMenuProps) {
+const FilterMenu: Component<FilterMenuProps> = (props) => {
   let containerRef: HTMLDivElement | undefined;
 
   createEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef && !containerRef.contains(event.target as Node)) {
-        setTimeout(() => closemenu(), 300);
+        setTimeout(() => props.closemenu(), 300);
       }
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closemenu();
+        props.closemenu();
       }
     };
 
@@ -39,7 +33,7 @@ export default function FilterMenu({
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [closemenu]);
+  }, [props.closemenu]);
 
   return (
     <div class={styles.container} ref={containerRef}>
@@ -48,8 +42,8 @@ export default function FilterMenu({
         <div class={styles.libraryGroup}>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLanguage("TypeScript")}
-              checked={selectedLanguages.includes("TypeScript")}
+              onChange={() => props.toggleLanguage("TypeScript")}
+              checked={props.selectedLanguages.includes("TypeScript")}
               type="checkbox"
               id="typescript"
               name="languages"
@@ -58,8 +52,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLanguage("Kotlin")}
-              checked={selectedLanguages.includes("Kotlin")}
+              onChange={() => props.toggleLanguage("Kotlin")}
+              checked={props.selectedLanguages.includes("Kotlin")}
               type="checkbox"
               id="kotlin"
               name="languages"
@@ -68,8 +62,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLanguage("Java")}
-              checked={selectedLanguages.includes("Java")}
+              onChange={() => props.toggleLanguage("Java")}
+              checked={props.selectedLanguages.includes("Java")}
               type="checkbox"
               id="java"
               name="languages"
@@ -78,8 +72,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLanguage("CSS")}
-              checked={selectedLanguages.includes("CSS")}
+              onChange={() => props.toggleLanguage("CSS")}
+              checked={props.selectedLanguages.includes("CSS")}
               type="checkbox"
               id="css"
               name="languages"
@@ -94,8 +88,8 @@ export default function FilterMenu({
         <div class={styles.libraryGroup}>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("React")}
-              checked={selectedLibraries.includes("React")}
+              onChange={() => props.toggleLibrary("React")}
+              checked={props.selectedLibraries.includes("React")}
               type="checkbox"
               id="react"
               name="frameworks"
@@ -104,8 +98,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("TailwindCSS")}
-              checked={selectedLibraries.includes("TailwindCSS")}
+              onChange={() => props.toggleLibrary("TailwindCSS")}
+              checked={props.selectedLibraries.includes("TailwindCSS")}
               type="checkbox"
               id="tailwind"
               name="frameworks"
@@ -114,8 +108,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("React-Router")}
-              checked={selectedLibraries.includes("React-Router")}
+              onChange={() => props.toggleLibrary("React-Router")}
+              checked={props.selectedLibraries.includes("React-Router")}
               type="checkbox"
               id="react-router"
               name="frameworks"
@@ -124,8 +118,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("TanStackQuery")}
-              checked={selectedLibraries.includes("TanStackQuery")}
+              onChange={() => props.toggleLibrary("TanStackQuery")}
+              checked={props.selectedLibraries.includes("TanStackQuery")}
               type="checkbox"
               id="tsq"
               name="frameworks"
@@ -136,8 +130,8 @@ export default function FilterMenu({
         <div class={styles.libraryGroup}>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("Nextjs")}
-              checked={selectedLibraries.includes("Nextjs")}
+              onChange={() => props.toggleLibrary("Nextjs")}
+              checked={props.selectedLibraries.includes("Nextjs")}
               type="checkbox"
               id="next"
               name="frameworks"
@@ -146,8 +140,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("Express")}
-              checked={selectedLibraries.includes("Express")}
+              onChange={() => props.toggleLibrary("Express")}
+              checked={props.selectedLibraries.includes("Express")}
               type="checkbox"
               id="express"
               name="frameworks"
@@ -156,8 +150,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("Drizzle")}
-              checked={selectedLibraries.includes("Drizzle")}
+              onChange={() => props.toggleLibrary("Drizzle")}
+              checked={props.selectedLibraries.includes("Drizzle")}
               type="checkbox"
               id="drizzle"
               name="frameworks"
@@ -166,8 +160,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("Better-Auth")}
-              checked={selectedLibraries.includes("Better-Auth")}
+              onChange={() => props.toggleLibrary("Better-Auth")}
+              checked={props.selectedLibraries.includes("Better-Auth")}
               type="checkbox"
               id="better-auth"
               name="frameworks"
@@ -178,8 +172,8 @@ export default function FilterMenu({
         <div class={styles.libraryGroup}>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("React-Native")}
-              checked={selectedLibraries.includes("React-Native")}
+              onChange={() => props.toggleLibrary("React-Native")}
+              checked={props.selectedLibraries.includes("React-Native")}
               type="checkbox"
               id="react-native"
               name="frameworks"
@@ -188,8 +182,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("JetpackCompose")}
-              checked={selectedLibraries.includes("JetpackCompose")}
+              onChange={() => props.toggleLibrary("JetpackCompose")}
+              checked={props.selectedLibraries.includes("JetpackCompose")}
               type="checkbox"
               id="jetpack-compose"
               name="frameworks"
@@ -198,8 +192,8 @@ export default function FilterMenu({
           </div>
           <div class={styles.item}>
             <input
-              onChange={() => toggleLibrary("JavaFX")}
-              checked={selectedLibraries.includes("JavaFX")}
+              onChange={() => props.toggleLibrary("JavaFX")}
+              checked={props.selectedLibraries.includes("JavaFX")}
               type="checkbox"
               id="javafx"
               name="frameworks"
@@ -210,4 +204,6 @@ export default function FilterMenu({
       </fieldset>
     </div>
   );
-}
+};
+
+export default FilterMenu;

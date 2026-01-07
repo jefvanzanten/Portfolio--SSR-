@@ -1,6 +1,6 @@
 import { ssr, ssrHydrationKey, ssrAttribute, escape, createComponent } from "solid-js/web";
-import { createSignal, createMemo, Suspense, For, createEffect } from "solid-js";
-import { u as useProjects, P as ProjectCard } from "./ProjectCard-BOjGvxKO.mjs";
+import { createSignal, Suspense, For, createEffect } from "solid-js";
+import { u as useProjects, P as ProjectCard } from "./ProjectCard-CB9qMRoe.mjs";
 import "./useImageViewModal-DQHEEIMU.mjs";
 const styles$1 = {
   "content-container": "_content-container_qq8gg_1",
@@ -65,30 +65,17 @@ function FilterTagBar({
 var _tmpl$ = ["<main", "><div", "><section", "><button>", "</button><!--$-->", "<!--/--></section><!--$-->", "<!--/--><section", ">", "</section></div></main>"], _tmpl$2 = ["<p", ">Loading...</p>"];
 function ProjectsPage() {
   const {
-    projects
+    filteredProjects,
+    selectedLanguages,
+    selectedLibraries,
+    toggleLanguage,
+    toggleLibrary,
+    activeTags
   } = useProjects();
   const [isFilterMenuOpen, setIsFilterMenuOpen] = createSignal(false);
-  const [selectedLanguages, setSelectedLanguages] = createSignal([]);
-  const [selectedLibraries, setSelectedLibraries] = createSignal([]);
-  const filtered = createMemo(() => {
-    return projects().filter((project) => {
-      if (!project.languages || !project.libraries) {
-        return false;
-      }
-      const languageMatch = selectedLanguages().length === 0 || selectedLanguages().every((lang) => project.languages.includes(lang));
-      const libraryMatch = selectedLibraries().length === 0 || selectedLibraries().every((lib) => project.libraries.includes(lib));
-      return languageMatch && libraryMatch;
-    });
-  });
-  const toggleLanguage = (language) => {
-    setSelectedLanguages((prev) => prev.includes(language) ? prev.filter((l) => l !== language) : [...prev, language]);
-  };
-  const toggleLibrary = (library) => {
-    setSelectedLibraries((prev) => prev.includes(library) ? prev.filter((l) => l !== library) : [...prev, library]);
-  };
-  return ssr(_tmpl$, ssrHydrationKey(), ssrAttribute("class", escape(styles$1["content-container"], true), false), ssrAttribute("class", escape(styles$1["filter-container"], true), false), isFilterMenuOpen() ? "Close Filters" : "Open Filters", selectedLanguages().length > 0 || selectedLibraries().length > 0 ? escape(createComponent(FilterTagBar, {
+  return ssr(_tmpl$, ssrHydrationKey(), ssrAttribute("class", escape(styles$1["content-container"], true), false), ssrAttribute("class", escape(styles$1["filter-container"], true), false), isFilterMenuOpen() ? "Close Filters" : "Open Filters", activeTags().length > 0 ? escape(createComponent(FilterTagBar, {
     get tags() {
-      return [...selectedLanguages(), ...selectedLibraries()];
+      return activeTags();
     },
     onTagClick: (tag2) => {
       if (selectedLanguages().includes(tag2)) {
@@ -114,7 +101,7 @@ function ProjectsPage() {
     get children() {
       return createComponent(For, {
         get each() {
-          return filtered();
+          return filteredProjects();
         },
         children: (project) => createComponent(ProjectCard, {
           project

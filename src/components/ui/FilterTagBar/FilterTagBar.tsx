@@ -1,4 +1,4 @@
-import { For } from "solid-js";
+import { For, type Component } from "solid-js";
 import style from "./FilterTagBar.module.css";
 
 type FilterTagBarProps = {
@@ -6,16 +6,18 @@ type FilterTagBarProps = {
   onTagClick: (tag: string) => void;
 };
 
-export default function FilterTagBar({ tags, onTagClick }: FilterTagBarProps) {
+const FilterTagBar: Component<FilterTagBarProps> = (props) => {
   return (
     <div class={style.container}>
-      <For each={tags}>
+      <For each={props.tags}>
         {(tag) => (
-          <button onClick={() => onTagClick(tag)} class={style.tag}>
+          <button onClick={() => props.onTagClick(tag)} class={style.tag}>
             {tag}
           </button>
         )}
       </For>
     </div>
   );
-}
+};
+
+export default FilterTagBar;

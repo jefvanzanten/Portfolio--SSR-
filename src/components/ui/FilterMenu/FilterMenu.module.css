@@ -52,8 +52,8 @@
 
 @media screen and (min-width: 1024px) {
   .container {
-    width: 40%;
-    top: 8em;
+    width: 20%;
+    top: 7em;
     /* left: calc(var(--project-container-width) / 2); */
     left: var(--project-offset);
   }

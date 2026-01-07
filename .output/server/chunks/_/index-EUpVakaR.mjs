@@ -1,7 +1,7 @@
 import { createComponent, ssr, ssrHydrationKey, ssrAttribute, escape } from "solid-js/web";
 import { Suspense, For } from "solid-js";
-import { L as Link$1 } from "./router-DK1QD-UY.mjs";
-import { P as ProjectCard, u as useProjects } from "./ProjectCard-BOjGvxKO.mjs";
+import { L as Link$1 } from "./router-DjRWwrF-.mjs";
+import { u as useProjects, P as ProjectCard } from "./ProjectCard-CB9qMRoe.mjs";
 import "./server.mjs";
 import "node:async_hooks";
 import "node:stream/web";

@@ -1,4 +1,4 @@
-import { createSignal, onMount, For } from "solid-js";
+import { createSignal, createMemo, onMount, For } from "solid-js";
 import { ssr, ssrHydrationKey, ssrAttribute, escape, createComponent } from "solid-js/web";
 import { u as useImageViewModal } from "./useImageViewModal-DQHEEIMU.mjs";
 const projects$1 = [
@@ -235,7 +235,46 @@ const projects$1 = [
 ];
 const [projects] = createSignal(projects$1);
 function useProjects() {
-  return { projects };
+  const [selectedLanguages, setSelectedLanguages] = createSignal([]);
+  const [selectedLibraries, setSelectedLibraries] = createSignal([]);
+  const filteredProjects = createMemo(() => {
+    return projects().filter((project) => {
+      if (!project.languages || !project.libraries) {
+        return false;
+      }
+      const languageMatch = selectedLanguages().length === 0 || selectedLanguages().every((lang) => project.languages.includes(lang));
+      const libraryMatch = selectedLibraries().length === 0 || selectedLibraries().every((lib) => project.libraries.includes(lib));
+      return languageMatch && libraryMatch;
+    });
+  });
+  const toggleLanguage = (language) => {
+    setSelectedLanguages(
+      (prev) => prev.includes(language) ? prev.filter((l) => l !== language) : [...prev, language]
+    );
+  };
+  const toggleLibrary = (library) => {
+    setSelectedLibraries(
+      (prev) => prev.includes(library) ? prev.filter((l) => l !== library) : [...prev, library]
+    );
+  };
+  const clearFilters = () => {
+    setSelectedLanguages([]);
+    setSelectedLibraries([]);
+  };
+  const activeTags = createMemo(() => [
+    ...selectedLanguages(),
+    ...selectedLibraries()
+  ]);
+  return {
+    projects,
+    filteredProjects,
+    selectedLanguages,
+    selectedLibraries,
+    toggleLanguage,
+    toggleLibrary,
+    clearFilters,
+    activeTags
+  };
 }
 const imgContainer = "_imgContainer_1wn5k_39";
 const cover = "_cover_1wn5k_63";
