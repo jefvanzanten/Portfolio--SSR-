@@ -5,12 +5,16 @@ import {
   createRootRouteWithContext,
 } from "@tanstack/solid-router";
 import { HydrationScript } from "solid-js/web";
-import { lazy } from "solid-js";
+import { lazy, Show } from "solid-js";
 
 import styleCss from "../styles.css?url";
 import Navigation from "../components/Navigation/Navigation";
+import { useImageViewModal } from "../hooks/useImageViewModal";
+// import ImageViewModal from "../components/ImageViewModal/ImageViewModal";
 
-const ImageViewModal = lazy(() => import("../components/ui/ImageViewModal"));
+const ImageViewModal = lazy(
+  () => import("../components/ImageViewModal/ImageViewModal")
+);
 
 // Devtools in development mode only
 const TanStackRouterDevtools = import.meta.env.DEV
@@ -35,6 +39,8 @@ export const Route = createRootRouteWithContext()({
 });
 
 function RootComponent() {
+  const { isOpen } = useImageViewModal();
+
   return (
     <html style={{ "background-color": "#0a0a0a" }}>
       <head>
@@ -47,7 +53,9 @@ function RootComponent() {
         <HeadContent />
         <Navigation />
         <Outlet />
-        <ImageViewModal />
+        <Show when={isOpen()}>
+          <ImageViewModal />
+        </Show>
         <TanStackRouterDevtools />
         <Scripts />
       </body>

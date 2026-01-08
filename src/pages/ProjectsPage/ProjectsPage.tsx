@@ -2,9 +2,9 @@ import { createSignal, For, Suspense, type Component } from "solid-js";
 import styles from "./ProjectsPage.module.css";
 import useProjects from "../../hooks/useProjects";
 import type { Language, Library } from "../../models/types.project";
-import ProjectCard from "../../components/ui/ProjectCard";
-import FilterMenu from "../../components/ui/FilterMenu/FilterMenu";
-import FilterTagBar from "../../components/ui/FilterTagBar/FilterTagBar";
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import FilterMenu from "../../components/FilterMenu/FilterMenu";
+import FilterTagBar from "../../components/FilterTagBar/FilterTagBar";
 
 const ProjectsPage: Component = () => {
   const {

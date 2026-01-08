@@ -1,5 +1,5 @@
 import styles from "./Navigation.module.css";
-import Hamburger from "../ui/Hamburger/Hamburger";
+import Hamburger from "../Hamburger/Hamburger";
 import { createSignal, For, createMemo, Show, type Component } from "solid-js";
 import { Link, useLocation } from "@tanstack/solid-router";
 

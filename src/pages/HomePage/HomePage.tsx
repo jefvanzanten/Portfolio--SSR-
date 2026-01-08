@@ -1,9 +1,9 @@
 import { For, Suspense, type Component } from "solid-js";
 
 import styles from "./HomePage.module.css";
-import NavButton from "../../components/ui/NavButton";
+import NavButton from "../../components/NavButton/NavButton";
 import useProjects from "../../hooks/useProjects";
-import ProjectCard from "../../components/ui/ProjectCard";
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
 
 const HomePage: Component = () => {
   const { projects } = useProjects();
